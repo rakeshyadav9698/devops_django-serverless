@@ -1,0 +1,24 @@
+{
+    "Yes": {
+        "aws_region": "ap-south-1",
+        "django_settings": "Yes",
+        "exclude": [
+            "boto3",
+            "dateutil",
+            "botocore",
+            "s3transfer",
+            "concurrent"
+        ],
+        "profile_name": "default",
+        "project_name": "serverless-api",
+        "runtime": "python3.9",
+        "s3_bucket": "server-django-api"
+    },
+    "production": {
+        "vpc_config": {
+            "SubnetIds": ["subnet-0da4818ffd9634d9c", "subnet-02c2a25b25433ae14"],
+            "SecurityGroupIds": ["sg-0fe820bdef21281ce"]
+        }
+    }
+}
+
