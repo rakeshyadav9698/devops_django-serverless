@@ -1,7 +1,8 @@
 {
-    "Yes": {
+    "dev": {
         "aws_region": "ap-south-1",
-        "django_settings": "Yes",
+        "django_settings": "serverless_api.settings",
+        "app_function": "serverless_api.wsgi.application",
         "exclude": [
             "boto3",
             "dateutil",
@@ -11,14 +12,7 @@
         ],
         "profile_name": "default",
         "project_name": "serverless-api",
-        "runtime": "python3.9",
-        "s3_bucket": "server-django-api"
-    },
-    "production": {
-        "vpc_config": {
-            "SubnetIds": ["subnet-0da4818ffd9634d9c", "subnet-02c2a25b25433ae14"],
-            "SecurityGroupIds": ["sg-0fe820bdef21281ce"]
-        }
+        "runtime": "python3.12",
+        "s3_bucket": "zappa-erwckuo6m"
     }
 }
-
