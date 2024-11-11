@@ -1,3 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+venv/
+serverless_api/api/__pycache__/
+serverless_api/api/migrations/__pycache__/
+serverless_api/serverless_api/__pycache__/
