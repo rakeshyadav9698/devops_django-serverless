@@ -13,6 +13,9 @@
         "project_name": "serverless-api",
         "runtime": "python3.12",
         "s3_bucket": "zappa-erwckuo6m",
-        "slim_handler": true
+        "slim_handler": true,
+        "layers": [
+            "arn:aws:lambda:ap-south-1:058264186456:layer:mysqlclient:1"
+        ]
     }
 }
