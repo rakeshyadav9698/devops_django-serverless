@@ -54,3 +54,4 @@ jobs:
         run: |
           cp serverless_api/zappa_settings.json .
           zappa update dev
+
