@@ -1,4 +1,4 @@
-name: Deploy Django with Zappa
+name: Deploy to AWS Lambda with Zappa
 
 on:
   push:
@@ -10,39 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Checkout the code
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Set up Python environment
-    - name: Set up Python
+    - name: Set up Python environment
       uses: actions/setup-python@v4
       with:
         python-version: '3.12'
 
-    # Install dependencies
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
+        python -m venv venv
+        source venv/bin/activate
         pip install -r requirements.txt
-        pip install --upgrade zappa
+        pip install zappa
 
-    # Configure AWS CLI
-    - name: Configure AWS CLI
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-        aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-        aws configure set region ap-south-1
+    - name: Set up AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-south-1
 
-    # Deploy to AWS Lambda
-    - name: Deploy to AWS Lambda
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: 'ap-south-1'
+    - name: Deploy with Zappa
       run: |
+        source venv/bin/activate
         cp serverless_api/zappa_settings.json .
         zappa update dev
